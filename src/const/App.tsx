@@ -2,16 +2,14 @@ import Cita from "../components/layouts/Cita";
 import BtnGenerarCita from "../components/common/BtnGenerarCita";
 import { useState } from "react";
 import { tipoActualizadorCita, tiposCita } from "../types/types";
-import generarCita from "../utils/generarCita";
 
-var state: tiposCita; 
-generarCita({limit: 1})
-.then(data => {
-  if(data && "length" in data){;
-    state = data[0];
-  } 
-})
-.catch(error => console.log(error));
+var state: tiposCita = {
+  _id: "5eb17aaeb69dc744b4e72a4a",
+  quoteText: "The first rule of any technology used in a business is that automation applied to an efficient operation will magnify the efficiency. The second is that automation applied to an inefficient operation will magnify the inefficiency.",
+  quoteAuthor: "Bill Gates",
+  quoteGenre: "business",
+  __v: 0
+} 
 
 function App() {
   let [cita, cambiarCita]: [tiposCita, tipoActualizadorCita] = useState(state);
