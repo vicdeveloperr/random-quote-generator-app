@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
-import generarCitaAleatoria from "../../utils/generarCitaAleatoria";
+import generarCita from "../../utils/generarCita";
 import { tipoActualizadorCita } from "../../types/types";
 
 function BtnGenerarCita({ cambiarCita }: { cambiarCita: tipoActualizadorCita}) {
@@ -15,7 +15,14 @@ function BtnGenerarCita({ cambiarCita }: { cambiarCita: tipoActualizadorCita}) {
     );
 
     function generarNuevaCita() {
-      cambiarCita(generarCitaAleatoria());
+      generarCita({limit: 100})
+      .then(data => {
+        if(data && Array.isArray(data)){
+          let randomIndex = Math.floor(Math.random() * data.length)
+          cambiarCita(data[randomIndex])
+        }
+      })
+      .catch(error => error);
     }
 }
 
